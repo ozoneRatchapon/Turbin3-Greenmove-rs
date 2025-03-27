@@ -23,6 +23,7 @@ mod tests {
         println!("");
         println!("To save your wallet, copy and paste the following into a JSON file:");
         println!("{:?}", kp.to_bytes());
+        // Q22025 - 7W2VZn3b9eCLiXau7LXLDUhrLiNYdQMEWfaJubEA43Jo
     }
 
     use bs58;
