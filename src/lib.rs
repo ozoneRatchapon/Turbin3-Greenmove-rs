@@ -172,7 +172,7 @@ mod tests {
         );
     }
 
-    use crate::programs::Turbin3_prereq::{CompleteArgs, Turbin3PrereqProgram};
+    use crate::programs::Turbin3_prereq::{CompleteArgs, Turbin3PrereqProgram, UpdateArgs};
     #[test]
     fn submit_completion() {
         // Create a Solana devnet connection
@@ -185,7 +185,7 @@ mod tests {
             signer.pubkey().to_bytes().as_ref(),
         ]);
         // Define our instruction data
-        let args = CompleteArgs {
+        let args = UpdateArgs {
             github: b"ozoneRatchapon".to_vec(),
         };
         // Get recent blockhash
@@ -193,7 +193,8 @@ mod tests {
             .get_latest_blockhash()
             .expect("Failed to get recent blockhash");
         // Invoke the "complete" function
-        let transaction = Turbin3PrereqProgram::complete(
+        // Once you done "complete" function. use ::update instead of ::complete
+        let transaction = Turbin3PrereqProgram::update(
             &[&signer.pubkey(), &prereq, &system_program::id()],
             &args,
             Some(&signer.pubkey()),

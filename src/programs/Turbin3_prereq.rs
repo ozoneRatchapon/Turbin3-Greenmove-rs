@@ -4,60 +4,107 @@ idlgen!({
     "version": "0.1.0",
     "name": "Turbin3_prereq",
     "instructions": [
+      {
+        "name": "complete",
+        "discriminator": [
+          0,
+          77,
+          224,
+          147,
+          136,
+          25,
+          88,
+          76
+        ],
+        "accounts": [
           {
-            "name": "complete",
-            "accounts": [
-              {
-                "name": "signer",
-                "isMut": true,
-                "isSigner": true
-              },
-              {
-                "name": "prereq",
-                "isMut": true,
-                "isSigner": false
-              },
-              {
-                "name": "systemProgram",
-                "isMut": false,
-                "isSigner": false
-              }
-            ],
-            "args": [
-              {
-                "name": "github",
-                "type": "bytes"
-              }
-            ]
+            "name": "signer",
+            "isMut": true,
+            "isSigner": true
+            // "writable": true,
+            // "signer": true
           },
           {
-            "name": "update",
-            "accounts": [
-              {
-                "name": "signer",
-                "isMut": true,
-                "isSigner": true
-              },
-              {
-                "name": "prereq",
-                "isMut": true,
-                "isSigner": false
-              },
-              {
-                "name": "systemProgram",
-                "isMut": false,
-                "isSigner": false
-              }
-            ],
-            "args": [
-              {
-                "name": "github",
-                "type": "bytes"
-              }
-            ]
+            "name": "prereq",
+            "isMut": true,
+            "isSigner": false,
+            // "writable": true,
+            "pda": {
+              "seeds": [
+                {
+                  "kind": "const",
+                  "value": [
+                    112,
+                    114,
+                    101,
+                    114,
+                    101,
+                    113
+                  ]
+                },
+                {
+                  "kind": "account",
+                  "path": "signer"
+                }
+              ]
+            }
+          },
+          {
+            "name": "system_program",
+            "isMut": false,
+            "isSigner": false,
+            "address": "11111111111111111111111111111111"
           }
+        ],
+        "args": [
+          {
+            "name": "github",
+            "type": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "update",
+        "discriminator": [
+          219,
+          200,
+          88,
+          176,
+          158,
+          63,
+          253,
+          127
+        ],
+        "accounts": [
+          {
+            "name": "signer",
+            "isMut": true,
+            "isSigner": true,
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "prereq",
+            "isMut": true,
+            "isSigner": false,
+            "writable": true
+          },
+          {
+            "name": "system_program",
+            "isMut": false,
+            "isSigner": false,
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "github",
+            "type": "bytes"
+          }
+        ]
+      }
     ],
     "metadata": {
-        "address": "HC2oqz2p6DEWfrahenqdq2moUcga9c9biqRBcdK3XKU1"
+        "address": "ADcaide4vBtKuyZQqdU689YqEGZMCmS4tL35bdTv9wJa"
     }
 });
