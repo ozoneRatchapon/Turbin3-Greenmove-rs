@@ -4,7 +4,7 @@ mod programs;
 mod tests {
 
     use solana_client::rpc_client::RpcClient;
-    use solana_program::{pubkey::Pubkey, system_instruction::transfer, system_program};
+    use solana_program::{hash::hash, pubkey::Pubkey, system_instruction::transfer, system_program};
     use solana_sdk::{
         message::Message,
         signature::{read_keypair_file, Keypair, Signer},
@@ -79,6 +79,18 @@ mod tests {
     fn transfer_sol() {
         // Import our keypair
         let keypair = read_keypair_file("dev-wallet.json").expect("Couldn't find wallet file");
+
+        // With the imported Keypair, we can sign a new message.
+        let pubkey = keypair.pubkey();
+        let message_bytes = b"I verify my solana Keypair!";
+        let sig = keypair.sign_message(message_bytes);
+        let sig_hashed = hash(sig.as_ref());
+        // After that we can verify the singature, using the default implementation
+        match sig.verify(&pubkey.to_bytes(), &sig_hashed.to_bytes()) {
+            true => println!("Signature verified"),
+            false => println!("Verification failed"), // TODO: Fix this, now got this error
+        }
+
         // Define our Turbin3 public key
         let to_pubkey = Pubkey::from_str("AqdrF1bMEayzZC72R7SxsC2KFqybT5rHPYswkFWe5Mkn").unwrap();
         // Create a Solana devnet connection
